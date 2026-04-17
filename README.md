@@ -1,0 +1,2 @@
+# ZadanieMLOPS
+MLOPS - PROJEKT 
