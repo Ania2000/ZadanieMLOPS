@@ -1,31 +1,19 @@
 repos:
-   - repo: https://github.com/astral-sh/ruff-pre-commit
-     rev: v0.15.6
-     hooks:
-        - id: ruff-check  # Linter
-          args: [--fix]  # Ensure fixes are applied
-        - id: ruff-format  # Formatter
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.15.11
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format
 
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.10.0
+    hooks:
+        - id: mypy
+          additional_dependencies: [ types-PyYAML ]
 
-   - repo: https://github.com/pre-commit/mirrors-pylint
-     rev: v2.4.4
-     hooks:
-       - id: pylint
-         args: [ "--rcfile=.pylintrc-pre" ]
-   - repo: https://github.com/pre-commit/mirrors-isort
-     rev: v4.3.21
-     hooks:
-       - id: isort
-   - repo: https://github.com/ambv/black
-     rev: 19.10b0
-     hooks:
-       - id: black
-   - repo: https://github.com/pycqa/pydocstyle
-     rev: 4.0.1
-     hooks:
-       - id: pydocstyle
-   - repo: https://github.com/yunojuno/pre-commit-xenon
-     rev: cc59b0431a5d072786b59430e9b342b2881064f6
-     hooks:
-       - id: xenon
-         args: [ "--max-average=A", "--max-modules=C", "--max-absolute=C" ]
+  - repo: https://github.com/yunojuno/pre-commit-xenon
+    rev: cc59b0431a5d072786b59430e9b342b2881064f6
+    hooks:
+      - id: xenon
+        args: ["--max-average=A", "--max-modules=C", "--max-absolute=C"]

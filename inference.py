@@ -19,11 +19,13 @@ def load_model(path: Path = MODEL_PATH):
 
 def predict(model, features: dict) -> str:
     """Make a prediction and return the predicted class name."""
-    data = [[
-        features["sepal_length"],
-        features["sepal_width"],
-        features["petal_length"],
-        features["petal_width"],
-    ]]
+    data = [
+        [
+            features["sepal_length"],
+            features["sepal_width"],
+            features["petal_length"],
+            features["petal_width"],
+        ]
+    ]
     prediction = model.predict(data)[0]
     return CLASS_NAMES[int(prediction)]
