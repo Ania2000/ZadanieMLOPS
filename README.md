@@ -1,5 +1,16 @@
 # ZadanieMLOPS
-MLOPS - Mój Projekt 
+Sentiment Analysis API (FastAPI + ML)
+
+Aplikacja do analizy sentymentu tekstu oparta na FastAPI i modelu ML 
+## Funkcjonalność
+
+- Endpoint: POST /predict
+- Wyjście: JSON z polem: prediction (`negative`, `neutral`, `positive`)
+
+### Uruchomienie lokalne
+
+1. Zainstaluj zależności: bash, uv sync
+
 
 ## Model
 
