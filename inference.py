@@ -1,31 +1,29 @@
 from pathlib import Path
 
 import joblib
+from sentence_transformers import SentenceTransformer
 
 
-MODEL_PATH = Path("iris_model.joblib")
+MODEL_DIR = Path("models/sentiment")
+ENCODER_PATH = MODEL_DIR / "sentence_transformer.model"
+CLASSIFIER_PATH = MODEL_DIR / "classifier.joblib"
 
-CLASS_NAMES = {
-    0: "setosa",
-    1: "versicolor",
-    2: "virginica",
+LABELS = {
+    0: "negative",
+    1: "neutral",
+    2: "positive",
 }
 
 
-def load_model(path: Path = MODEL_PATH):
-    """Load the trained model from a file."""
-    return joblib.load(path)
+class SentimentInference:
 
 
-def predict(model, features: dict) -> str:
-    """Make a prediction and return the predicted class name."""
-    data = [
-        [
-            features["sepal_length"],
-            features["sepal_width"],
-            features["petal_length"],
-            features["petal_width"],
-        ]
-    ]
-    prediction = model.predict(data)[0]
-    return CLASS_NAMES[int(prediction)]
+    def __init__(self) -> None:
+        self.encoder = SentenceTransformer(str(ENCODER_PATH))
+        self.classifier = joblib.load(CLASSIFIER_PATH)
+
+    def predict(self, text: str) -> str:
+
+        embedding = self.encoder.encode([text])
+        prediction = self.classifier.predict(embedding)[0]
+        return LABELS[int(prediction)]

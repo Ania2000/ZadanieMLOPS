@@ -1,26 +1,18 @@
 from fastapi import FastAPI
 
 from api.models.sentiment import PredictRequest, PredictResponse
-from inference import load_model, predict as run_prediction
+from inference import SentimentInference
 
 
 app = FastAPI()
-model = load_model()
-
+model = SentimentInference()
 
 @app.get("/")
-def welcome_root() -> dict[str, str]:
-
-    return {"message": "Welcome to the ML API"}
-
-
-@app.get("/health")
-def health_check() -> dict[str, str]:
-
-    return {"status": "ok"}
+def root() -> dict[str, str]:
+    return {"message": "Sentiment API is running"}
 
 
-@app.post("/predict")
+@app.post("/predict", response_model=PredictResponse)
 def predict(request: PredictRequest) -> PredictResponse:
-    _ = request.text
-    return PredictResponse(prediction="positive")
+    prediction = model.predict(request.text)
+    return PredictResponse(prediction=prediction)
