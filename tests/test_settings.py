@@ -2,7 +2,7 @@ from settings import Settings
 
 
 def test_settings_load_correctly() -> None:
-    """Test that settings are loaded correctly from test environment."""
+
     settings = Settings()
 
     assert settings.ENVIRONMENT == "test"
